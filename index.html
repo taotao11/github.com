@@ -1,76 +1,329 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>下拉框</title>
+		<meta charset="utf-8" />
+		<title>田涛个人主页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<!--导入bootstrap-->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_pdu5e8kdfk2tvs4i.css"/>
 	</head>
+	<style>
+		/*淘宝字体图标库*/
+		.iconfont{
+		    font-family:"iconfont" !important;
+		    font-size:16px;font-style:normal;
+		    -webkit-font-smoothing: antialiased;
+		    -webkit-text-stroke-width: 0.2px;
+		    -moz-osx-font-smoothing: grayscale;
+		    }
+		    /*头部*/
+		.head{
+			position: fixed;/*固定定位*/
+		}
+		.h-head{
+			height: 70px;
+			background: #D3D3D3;
+			opacity: .8;
+		}
+		.h-nav{
+			line-height: 70px;
+		}
+		.h-title{
+			margin-top: -20px;
+		}
+		.h-line{
+			width: 90px;
+			height: 2px;
+			background: #000;
+		}
+		/*内容*/
+		.center{
+			position: relative;
+			width:100%;
+			height:auto;
+			background: #F6F6F6;
+			
+		}
+		/*每个模块的宽高*/
+		.c-page{
+			width: 100%;
+			height: 600px;
+			background: #F6F6F6;
+		}
+		/*主页*/
+		.c-z-iocn i{
+			font-size: 100px;
+		}
+		.c-z-box{
+			width: 200px;
+			height: 200px;
+			position: relative;
+			top: 50px;
+		}
+		.c-z-title{
+			font-size: 17px;
+		}
+		.c-z-title p{
+			margin-left: 30px;
+		}
+		.c-z-line{
+			width: 530px;
+			height: 3px;
+			background: #CCCCCC;
+		}
+		.c-z-in{
+			margin-left: 30px;
+		}
+		/*关于*/
+		.c-a-in{
+			height: 300px;
+			-webkit-border-radius: 5%;
+			-moz-border-radius: 5%;
+			border-radius: 5%;
+			background: #A0A0B4;
+		}
+		.c-a-line{
+			background: red;
+			margin: 0 auto;
+		}
+		.c-a-iocn i{
+			font-size: 50px;
+		}
+		.c-a-i-centen{
+			margin-top: 20px;
+			width: 100px;
+			height: 100px;
+			line-height: 100px;
+			text-align: center;
+			border: 2px #fff solid;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+			margin-left: 40px;
+			transition: all 1s;
+		}
+		.c-a-i-centen:hover{
+			background: #fff;
+		}
+		.em-line{
+			position: absolute;
+			width: 80px;
+			height: 2px ;
+			background: #CCCCCC;
+			transform: rotate(135deg);
+		}
+		.c-a-titel{
+			margin-top: 10px;
+			margin-left: 35px;
+		}
+		.c-a-titel-right{
+			margin-left: 50px;
+		}
+		/*专业技能*/
+		.c-p-title{
+			padding: 30px 0;
+			margin: 0 auto;
+			width: 700px;
+		}
+		.c-p-iocn:hover{
+			font-size: 80px;
+		}
+		.c-j-title{
+			margin-left: 50px;
+		}
+		.c-p-end{
+			margin-left: 40px;
+		}
+		.c-p-end p{
+			margin-left: 40px;	
+		}
+		.c-p-experience{
+			margin-left: 100px;
+		}
+	</style>
 	<body>
-		<style>
-			*{margin: 0; padding: 0;}
-			ul ,li{list-style: none;}
-			.topBox{
-				margin: 0  auto;
-				width:300px;
-				height:80px;
-				line-height: 80px;
-				text-align: center;
-				background:olivedrab;
-				transition: all 3s;
-				-webkit-transition:all 3s;
-			}
-			.showBox{
-				position:absolute;
-				display: none;
-				left: 0;
-				top: 0;
-				/*过渡效果*/
-				
-			}
-			.showBox li{
-				width:300px;
-				height:80px;
-				background: pink;
-				line-height: 80px;
-				text-align: center;
-			
-			}
-		</style>
-		<div class="topBox">点击下拉&nbsp;&nbsp;<span class="title_show"></span></div>
-		<ul class="showBox">
-			<li>item1</li>
-			<li>item1</li>
-			<li>item1</li>
-		</ul>
-		<script>
-			var topBox = dom("topBox");
-			var showBox = dom("showBox");
-			var titleShow = dom("title_show");
-			var clickSum = 0;//点击总数
-			var clickSun = 1;
-			topBox.onclick = function(e){
-				clickSum++;
-				titleShow.innerHTML = "您点击了" + clickSum +"次";
-				if(clickSun ==1 ){
-					//获取点击盒子的left
-					var showLeft = this.offsetLeft;
-					//获取点击盒子的top
-					var showTop = this.offsetTop;
-					//设置显示盒子的属性
-					showBox.style.left = showLeft + 'px';
-					showBox.style.top = showTop + topBox.offsetHeight +'px';
-					showBox.style.display = 'block';
-					clickSun *= -1; 
-				}else{
-					//再次点击隐藏
-					showBox.style.display = 'none';
-					clickSun *= -1; 
-				}
-			};
-			//定义获取节点的方法
-			function dom(dom){
-				return document.getElementsByClassName(dom)[0];
-			}
-			
-		</script>
+		<!---头部-->
+		<head class="head">
+			<div class="row h-head clearfix">
+				<div id="" class="col-md-offset-1 col-md-3 pull-left">
+					<div class="h-title">
+						<p><h3>&nbsp;&nbsp;田涛</h3></p>
+						<p class="h-line"></p>
+						<p>&nbsp;&nbsp;<em>个人简历/前端开发</em></p>
+					</div>
+					<div class="h-qz"></div>
+				</div>
+				<div id="" class=" col-md-4 h-nav pull-right">
+					<ul class="list-inline">
+						<li><a href="#c-zhuye">主页</a></li>
+						<li><a href="#c-about">关于我</a></li>
+						<li><a href="#c-jineng">专业技能</a></li>
+						<li><a href="#c-jingli">我的经历</a></li>
+					</ul>
+				</div>
+			</div>
+		</head>
+		<!--内容-->
+		<section class="center">
+			<div id="c-zhuye" class="c-page ">
+				<div class="col-md-offset-6 c-z-box">
+					<span class="c-z-iocn"><i class="iconfont icon-ren"></i></span>
+				</div>
+				<div class="c-z-title col-md-offset-4">
+					<p><em>生活是一种绵延不绝的渴望,渴望不断上升,变得更伟大而高贵</em></p>	
+				</div>
+				<div class="c-z-line col-md-offset-4"></div><br />
+				<div class="col-md-offset-5 ">
+					<p>姓名:<span class="c-z-in">田涛</span></p>
+					<p>年龄：<span class="c-z-in">22岁</span></p>
+					<p>邮箱：<span class="c-z-in">920518289@qq.com</span></p>
+					<p>电话：<span class="c-z-in">17602360801</span></p>
+					<p>学校：<span class="c-z-in">重庆电子工程职业学院</span></p>
+				</div>
+			</div>
+			<div id="c-about" class="c-page ">
+				<div class="text-center">
+					<h2 class="">关于我</h2><br>
+					<p class="h-line c-a-line"></p>
+					<p class="c-a-color"><em>ABOUT&nbsp;ME</em></p>
+				</div>
+				<div class="c-a-in col-md-6 col-md-offset-3">
+					<ul class="list-inline">
+						<li>
+							<div class="c-a-i-centen">
+								<span class="c-a-iocn"><i class="iconfont icon-icon307475"></i></span>
+							</div>
+							<br />
+							<div class="c-a-titel">
+								<p class="">学历</p>
+								<div class="em-line"></div>
+								<br/><p class="c-a-titel-right">专科</p>
+							</div>
+						</li>
+						<li>
+							<div class="c-a-i-centen">
+								<span class="c-a-iocn"><i class="iconfont icon-user"></i></span>
+							</div>
+							<br />
+							<div class="c-a-titel">
+								<p class="">求职</p>
+								<div class="em-line"></div>
+								<br/><p class="c-a-titel-right">前端开发</p>
+							</div>
+						</li>
+						<li>
+							<div class="c-a-i-centen">
+								<span class="c-a-iocn"><i class="iconfont icon-zuobiao"></i></span>
+							</div>
+							<br />
+							<div class="c-a-titel">
+								<p class="">坐标</p>
+								<div class="em-line"></div>
+								<br/><p class="c-a-titel-right">重庆大学城</p>
+							</div>
+						</li>
+						<li>
+							<div class="c-a-i-centen">
+								<span class="c-a-iocn"><i class="iconfont icon-woyaoqiuzhi"></i></span>
+							</div>
+							<br />
+							<div class="c-a-titel">
+								<p class="">状态</p>
+								<div class="em-line"></div>
+								<br/><p class="c-a-titel-right">随时可上班</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="c-jineng" class="c-page ">
+				<div class="text-center">
+					<h2 class="">专业技能</h2><br>
+					<p class="h-line c-a-line"></p>
+					<p class="c-a-color"><em>SKILL</em></p>
+				</div>
+				<div class="c-p-title">前端的学习需要持之以恒，知识深度与广度都很重要。而前端开发的重中之重就是原生javascript的理解。真心喜欢前端这个行业，希望能与公司一起成长、挑战...</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="c-a-i-centen c-p-iocn">
+							<span class="c-a-iocn"><i class="iconfont icon-html-copy"></i></span>
+						</div>
+						<div class="c-j-title">
+							<h3>html\html5</h3>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="c-a-i-centen c-p-iocn">
+							<span class="c-a-iocn"><i class="iconfont icon-CSS"></i></span>
+						</div>
+						<div class="c-j-title">
+							<h3>css\css3</h3>
+						</div>
+					</div>
+					<div class="col-md-2 c-p-iocn">
+						<div class="c-a-i-centen">
+							<span class="c-a-iocn"><i class="iconfont icon-javascript"></i></span>
+						</div>
+						<div class="c-j-title">
+							<h3>javascript</h3>
+						</div>
+					</div>
+					<div class="col-md-2 c-p-iocn">
+						<div class="c-a-i-centen">
+							<span class="c-a-iocn"><i class="iconfont icon-jquery"></i></span>
+						</div>
+						<div class="c-j-title">
+							<h3>jquery</h3>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="c-a-i-centen c-p-iocn">
+							<span class="c-a-iocn"><i class="iconfont icon-bootstrap1"></i></span>
+						</div>
+						<div class="c-j-title">
+							<h3>bootstrap</h3>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="c-a-i-centen c-p-iocn">
+							<span class="c-a-iocn"><i class="iconfont icon-java-02"></i></span>
+						</div>
+						<div class="c-j-title">
+							<h3>&nbsp;&nbsp;java</h3>
+						</div>
+					</div>
+				</div>
+				<div class="c-p-end">
+					<h3>个人总结</h3>
+					<p>1、熟练运用HTML/CSS布局，有一定审美能力，有与设计师沟通的经验，能快速理解设计师的设计思路并能快速的用代码实现</p>
+					<p>2、精通各主流移动设备浏览器间的差异性，能快速定位和解决各种兼容难题</p>
+					<p>3、熟悉Javascript/Json/XML/HTML5等Web前端技术，熟练使用js编写面向对象的应用程序，
+					熟练使用JQuery,能与后台开发人员一起编写Ajax互交程序；</p>
+					<p>3、掌握java的ssm框架</p>
+					<p>4、具备工作主动性和学习进去精神，对业界的最新技术发展动态有比较密切的关注。</p>
+				</div>
+			</div>
+			<div id="c-jingli" class="c-page ">
+				<div class="text-center">
+					<h2 class="">我的经历</h2><br>
+					<p class="h-line c-a-line"></p>
+					<p class="c-a-color"><em>MY&nbsp;EXPERIENCE</em></p>
+				</div>
+				<div class="c-p-experience">
+					<h4>重庆叠榭信息技术有限公司</h4>
+					<p>2016.10-2017.2</p>
+					<p>前端实习</p>
+					<p>负责公司前端页面开发</p>
+					<p>	-构建、维护及优化公司网站前端页面性能</p>
+					<p>负责公司旗下产品前端开发工作，完成前端架构</p>
+					<p>配合产品经理和UI设计师研究并改善用户体验</p>
+					
+				</div>
+			</div>
+		</section>
 	</body>
 </html>
