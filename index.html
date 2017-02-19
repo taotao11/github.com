@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>下拉框</title>
+	</head>
+	<body>
+		<style>
+			*{margin: 0; padding: 0;}
+			ul ,li{list-style: none;}
+			.topBox{
+				margin: 0  auto;
+				width:300px;
+				height:80px;
+				line-height: 80px;
+				text-align: center;
+				background:olivedrab;
+				transition: all 3s;
+				-webkit-transition:all 3s;
+			}
+			.showBox{
+				position:absolute;
+				display: none;
+				left: 0;
+				top: 0;
+				/*过渡效果*/
+				
+			}
+			.showBox li{
+				width:300px;
+				height:80px;
+				background: pink;
+				line-height: 80px;
+				text-align: center;
+			
+			}
+		</style>
+		<div class="topBox">点击下拉&nbsp;&nbsp;<span class="title_show"></span></div>
+		<ul class="showBox">
+			<li>item1</li>
+			<li>item1</li>
+			<li>item1</li>
+		</ul>
+		<script>
+			var topBox = dom("topBox");
+			var showBox = dom("showBox");
+			var titleShow = dom("title_show");
+			var clickSum = 0;//点击总数
+			var clickSun = 1;
+			topBox.onclick = function(e){
+				clickSum++;
+				titleShow.innerHTML = "您点击了" + clickSum +"次";
+				if(clickSun ==1 ){
+					//获取点击盒子的left
+					var showLeft = this.offsetLeft;
+					//获取点击盒子的top
+					var showTop = this.offsetTop;
+					//设置显示盒子的属性
+					showBox.style.left = showLeft + 'px';
+					showBox.style.top = showTop + topBox.offsetHeight +'px';
+					showBox.style.display = 'block';
+					clickSun *= -1; 
+				}else{
+					//再次点击隐藏
+					showBox.style.display = 'none';
+					clickSun *= -1; 
+				}
+			};
+			//定义获取节点的方法
+			function dom(dom){
+				return document.getElementsByClassName(dom)[0];
+			}
+			
+		</script>
+	</body>
+</html>
